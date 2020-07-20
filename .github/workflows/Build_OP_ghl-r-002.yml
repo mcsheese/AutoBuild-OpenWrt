@@ -4,9 +4,9 @@ on:
   release:
     types: [published]
 
-  #push:
-  #  branches: 
-  #    - master
+  push:
+    branches: 
+      - master
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -56,23 +56,17 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        sed -i '1s/#//' feeds.conf.default
-        sed -i '2s/#//' feeds.conf.default
-        sed -i '3s/#//' feeds.conf.default
-        sed -i '4s/#//' feeds.conf.default
-        sed -i '5s/#//' feeds.conf.default
         sed -i '6s/#//' feeds.conf.default
         sed -i '7s/#//' feeds.conf.default
         sed -i '8s/#//' feeds.conf.default
         sed -i '9s/#//' feeds.conf.default
         sed -i '10s/#//' feeds.conf.default
-        sed -i '11s/#//' feeds.conf.default
-        
+        sed -i '11s/#//' feeds.conf.default 
+               
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         ./scripts/feeds update -a
-        ./scripts/feeds install -a
         ./scripts/feeds install -a
     - name: Configuration Customization - Build_ghl-r-001
       env:
